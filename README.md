@@ -1,29 +1,38 @@
-# 🎓 cocapn-training
+# cocapn-training
 
-Cocapn fleet training utilities — curriculum generation, evaluation harness, and training data management.
+Training data management for the Cocapn Fleet — load, augment, convert, and quality-check PLATO training tiles.
 
-## Install
+## What This Gives You
+
+- **Dataset** — load/save/filter/split JSONL tile collections
+- **Augmentation** — generate synthetic training variations
+- **Converter** — transform tiles between formats
+- **Quality checks** — validate tile completeness and distribution
+- **Stratified splitting** — train/val/test splits with label balancing
+
+## Quick Start
 
 ```bash
 pip install cocapn-training
+
+from cocapn_training import Dataset
+
+ds = Dataset.load_jsonl("tiles.jsonl")
+print(f"Loaded {len(ds)} tiles")
+
+train, val, test = ds.split(ratios=(0.8, 0.1, 0.1))
+train.save_jsonl("train.jsonl")
 ```
 
-## What It Does
+## How It Fits
 
-Training utilities for fleet agents. Generates curricula from PLATO tiles, evaluates agent performance, and manages training datasets.
+The training infrastructure for the Cocapn Fleet. Part of the SuperInstance ecosystem.
 
-### Key Features
-
-- **Curriculum Generation** — Auto-generate training curricula from PLATO rooms
-- **Evaluation Harness** — Score agent outputs against tile standards
-- **Data Management** — Split, version, and distribute training data
-
-## Part of the Cocapn Fleet
-
-- [cocapn](https://github.com/cocapn/cocapn) — Main package
-- [plato-torch](https://github.com/cocapn/plato-torch) — Training room presets
-- [instinct-pipeline](https://github.com/cocapn/instinct-pipeline) — Knowledge compression
+Related repos:
+- [cocapn-plato](https://github.com/SuperInstance/cocapn-plato) — PLATO framework
+- [cocapn-curriculum](https://github.com/SuperInstance/cocapn-curriculum) — curriculum management
+- [cocapn-pipeline](https://github.com/SuperInstance/cocapn-pipeline) — data pipeline
 
 ## License
 
-MIT
+Apache 2.0
